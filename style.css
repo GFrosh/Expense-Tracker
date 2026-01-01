@@ -1,0 +1,127 @@
+/* === General Reset === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #f4f6f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+/* === Heading === */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* === Total Section === */
+.total {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.total h2 {
+    font-size: 1.5rem;
+    color: #2c7be5;
+}
+
+/* === Form Styling === */
+form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+form input,
+form select,
+form button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+form button {
+    grid-column: span 2;
+    background: #2c7be5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+form button:hover {
+    background: #1b5bbf;
+}
+
+/* === Table Styling === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+table th {
+    background: #f0f0f0;
+}
+
+table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+
+/* === Action Buttons (Edit/Delete) === */
+table td button {
+    padding: 6px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Edit button */
+.edit-btn {
+    background: #ffc107;
+    color: #333;
+}
+
+.edit-btn:hover {
+    background: #e0a800;
+    color: white;
+}
+
+/* Delete button */
+.delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #a71d2a;
+}
