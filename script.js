@@ -1,13 +1,67 @@
 const expenseForm = document.getElementById("expense-form");
 const expenseList = document.getElementById("expense-list");
 const totalEl = document.getElementById("total");
+const suggestionButton = document.getElementById("suggest-category-btn");
+const suggestionStatusEl = document.getElementById("suggestion-status");
 
-
+const categories = ["Food", "Studies", "Transport", "Entertainment", "Other"];
 
 // Load existing expenses from LocalStorage (or empty array if none)
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 
 let editId = null;
+
+function setSuggestionStatus(message, type = "info") {
+    suggestionStatusEl.textContent = message;
+    suggestionStatusEl.className = `status-${type}`;
+}
+
+function guessCategoryFromDescription(description) {
+    const normalizedText = description.toLowerCase();
+
+    const categoryKeywords = {
+        Food: ["food", "lunch", "dinner", "breakfast", "snack", "restaurant", "grocer", "pizza", "burger"],
+        Studies: ["book", "tuition", "course", "exam", "school", "class", "lecture", "study", "notebook"],
+        Transport: ["bus", "taxi", "uber", "fuel", "train", "bike", "flight", "transport", "fare"],
+        Entertainment: ["movie", "cinema", "netflix", "concert", "game", "party", "music", "show", "fun"],
+    };
+
+    for (const [category, keywords] of Object.entries(categoryKeywords)) {
+        const foundKeyword = keywords.some((keyword) => normalizedText.includes(keyword));
+        if (foundKeyword) {
+            return category;
+        }
+    }
+
+    return "Other";
+}
+
+function suggestCategory() {
+    const description = document.getElementById("description").value.trim();
+
+    if (!description) {
+        setSuggestionStatus("Add a description first, then ask for an AI category suggestion.", "error");
+        return;
+    }
+
+    setSuggestionStatus("Analyzing description...");
+
+    // Simulated AI suggestion step (safe first integration before adding a backend model call)
+    window.setTimeout(() => {
+        const suggestedCategory = guessCategoryFromDescription(description);
+        const categorySelect = document.getElementById("category");
+
+        if (categories.includes(suggestedCategory)) {
+            categorySelect.value = suggestedCategory;
+            setSuggestionStatus(`Suggested category: ${suggestedCategory}`, "success");
+            return;
+        }
+
+        setSuggestionStatus("No confident suggestion found. Please select a category manually.", "error");
+    }, 300);
+}
+
+suggestionButton.addEventListener("click", suggestCategory);
 
 // === Add / Update Expense ===
 expenseForm.addEventListener("submit", function (e) {
@@ -23,9 +77,10 @@ expenseForm.addEventListener("submit", function (e) {
         // Update existing expense
         expenses = expenses.map((exp) =>
             exp.id === editId
-            ? {
-                ...exp, amount: parseFloat(amount), description, category, date
-            }: exp
+                ? {
+                    ...exp, amount: parseFloat(amount), description, category, date,
+                }
+                : exp
         );
         editId = null;
     } else {
@@ -45,6 +100,7 @@ expenseForm.addEventListener("submit", function (e) {
     localStorage.setItem("expenses", JSON.stringify(expenses));
     renderExpenses();
     expenseForm.reset();
+    setSuggestionStatus("");
 });
 
 // === Render Expenses ===
@@ -87,8 +143,7 @@ function renderExpenses() {
 function deleteExpense(e) {
     const id = parseInt(e.target.getAttribute("data-id"));
     expenses = expenses.filter((exp) => exp.id !== id);
-    localStorage.setItem("expenses",
-        JSON.stringify(expenses));
+    localStorage.setItem("expenses", JSON.stringify(expenses));
     renderExpenses();
 }
 

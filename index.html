@@ -28,8 +28,10 @@
                 <option value="Other">Other</option>
             </select>
             <input type="date" id="date" required>
+            <button type="button" id="suggest-category-btn" class="secondary-btn">Suggest Category with AI</button>
             <button type="submit">Add Expense</button>
         </form>
+        <p id="suggestion-status" aria-live="polite"></p>
 
         <!-- Expense List -->
         <table>
