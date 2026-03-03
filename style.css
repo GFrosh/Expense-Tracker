@@ -45,7 +45,7 @@ form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 form input,
@@ -68,6 +68,32 @@ form button {
 
 form button:hover {
     background: #1b5bbf;
+}
+
+.secondary-btn {
+    background: #6c757d;
+}
+
+.secondary-btn:hover {
+    background: #555e66;
+}
+
+#suggestion-status {
+    min-height: 20px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+}
+
+.status-info {
+    color: #2c7be5;
+}
+
+.status-success {
+    color: #198754;
+}
+
+.status-error {
+    color: #dc3545;
 }
 
 /* === Table Styling === */
