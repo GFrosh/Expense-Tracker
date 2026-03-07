@@ -1,8 +1,11 @@
-const expenseForm = document.getElementById("expense-form");
-const expenseList = document.getElementById("expense-list");
-const totalEl = document.getElementById("total");
-const suggestionButton = document.getElementById("suggest-category-btn");
-const suggestionStatusEl = document.getElementById("suggestion-status");
+import { qs, qsa } from "./utils.js";
+import { categoryKeywords } from "./suggestions.js";
+
+const expenseForm = qs("#expense-form");
+const expenseList = qs("#expense-list");
+const totalEl = qs("#total");
+const suggestionButton = qs("#suggest-category-btn");
+const suggestionStatusEl = qs("#suggestion-status");
 
 const categories = ["Food", "Studies", "Transport", "Entertainment", "Other"];
 
@@ -19,13 +22,6 @@ function setSuggestionStatus(message, type = "info") {
 function guessCategoryFromDescription(description) {
     const normalizedText = description.toLowerCase();
 
-    const categoryKeywords = {
-        Food: ["food", "lunch", "dinner", "breakfast", "snack", "restaurant", "grocer", "pizza", "burger"],
-        Studies: ["book", "tuition", "course", "exam", "school", "class", "lecture", "study", "notebook"],
-        Transport: ["bus", "taxi", "uber", "fuel", "train", "bike", "flight", "transport", "fare"],
-        Entertainment: ["movie", "cinema", "netflix", "concert", "game", "party", "music", "show", "fun"],
-    };
-
     for (const [category, keywords] of Object.entries(categoryKeywords)) {
         const foundKeyword = keywords.some((keyword) => normalizedText.includes(keyword));
         if (foundKeyword) {
@@ -35,6 +31,8 @@ function guessCategoryFromDescription(description) {
 
     return "Other";
 }
+
+
 
 function suggestCategory() {
     const description = document.getElementById("description").value.trim();
@@ -60,8 +58,10 @@ function suggestCategory() {
         setSuggestionStatus("No confident suggestion found. Please select a category manually.", "error");
     }, 300);
 }
-
 suggestionButton.addEventListener("click", suggestCategory);
+
+
+
 
 // === Add / Update Expense ===
 expenseForm.addEventListener("submit", function (e) {
@@ -159,6 +159,7 @@ function editExpense(e) {
 
     editId = id; // set edit mode
 }
+
 
 // === Initial Render ===
 renderExpenses();
