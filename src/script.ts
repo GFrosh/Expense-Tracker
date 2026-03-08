@@ -5,31 +5,35 @@ const expenseForm = qs("#expense-form");
 const expenseList = qs("#expense-list");
 const totalEl = qs("#total");
 const suggestionButton = qs("#suggest-category-btn");
-const suggestionStatusEl = qs("#suggestion-status");
+const suggestionStatusEl: Element | null = qs("#suggestion-status");
 
 const categories = ["Food", "Studies", "Transport", "Entertainment", "Other"];
 
 // Load existing expenses from LocalStorage (or empty array if none)
+const storedExpenses = (key: string) => {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+}
 let expenses: {
     id: number;
     amount: number;
     description: string;
     category: string;
     date: string
-}[] = JSON.parse(localStorage.getItem("expenses")) || [];
+}[] = storedExpenses("expenses");
 
 let editId: number | null = null;
 
-function setSuggestionStatus(message, type = "info") {
-    suggestionStatusEl.textContent = message;
-    suggestionStatusEl.className = `status-${type}`;
+function setSuggestionStatus(message: string, type: string = "info"): void {
+    suggestionStatusEl ? suggestionStatusEl.textContent = message : null;
+    suggestionStatusEl ? suggestionStatusEl.className = `status-${type}` : null;
 }
 
-function guessCategoryFromDescription(description) {
+function guessCategoryFromDescription(description: string): string {
     const normalizedText = description.toLowerCase();
 
     for (const [category, keywords] of Object.entries(categoryKeywords)) {
-        const foundKeyword = keywords.some((keyword) => normalizedText.includes(keyword));
+        const foundKeyword = keywords.some((keyword: string) => normalizedText.includes(keyword));
         if (foundKeyword) {
             return category;
         }
@@ -41,7 +45,7 @@ function guessCategoryFromDescription(description) {
 
 
 function suggestCategory() {
-    const description = document.getElementById("description").value.trim();
+    const description = qs("#description")?.value.trim();
 
     if (!description) {
         setSuggestionStatus("Add a description first, then ask for an AI category suggestion.", "error");
@@ -53,7 +57,7 @@ function suggestCategory() {
     // Simulated AI suggestion step (safe first integration before adding a backend model call)
     window.setTimeout(() => {
         const suggestedCategory = guessCategoryFromDescription(description);
-        const categorySelect = document.getElementById("category");
+        const categorySelect = qs("#category");
 
         if (categories.includes(suggestedCategory)) {
             categorySelect.value = suggestedCategory;
