@@ -1,21 +1,29 @@
 {
-  "name": "expense-tracker",
-  "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GFrosh/Expense-Tracker.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/GFrosh/Expense-Tracker/issues"
-  },
-  "homepage": "https://github.com/GFrosh/Expense-Tracker#readme"
+	"name": "expense-tracker",
+	"version": "1.0.0",
+	"description": "An application to track expenses, allowing users to add, view, and manage their financial transactions.",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node src/app.js",
+		"dev": "nodemon src/app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GFrosh/Expense-Tracker.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"bugs": {
+		"url": "https://github.com/GFrosh/Expense-Tracker/issues"
+	},
+	"homepage": "https://github.com/GFrosh/Expense-Tracker#readme",
+	"dependencies": {
+		"express": "^5.2.1"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.14"
+	}
 }
