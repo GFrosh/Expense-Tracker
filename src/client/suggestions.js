@@ -1,6 +1,6 @@
 export const categoryKeywords = {
     Food: [
-        "food", "lunch", "dinner", "breakfast", "snack", "restaurant", "grocer", "pizza", "burger",
+        "akara", "food", "lunch", "dinner", "breakfast", "snack", "restaurant", "grocer", "pizza", "burger",
         "suya", "shawarma", "jollof", "rice", "chicken", "beef", "fish", "pork", "meat", "soup",
         "bread", "eggs", "milk", "coffee", "tea", "juice", "water", "drink", "beverage", "soda",
         "cake", "pastry", "biscuit", "chocolate", "candy", "icecream", "dessert", "salad", "sandwich",
@@ -16,7 +16,7 @@ export const categoryKeywords = {
         "calculator", "laptop", "data", "subscription", "printing", "photocopy", "handout", "past question",
         "registration", "clearance", "acceptance", "matriculation", "convocation", "gpa", "cgpa",
         "tutorial", "online course", "udemy", "coursera", "certification", "training", "workshop",
-        "textbook", "material", "software", "license", "plugin", "tool", "dev tool"
+        "textbook", "material", "manual", "software", "license", "plugin", "tool", "dev tool"
     ],
 
     Transport: [
